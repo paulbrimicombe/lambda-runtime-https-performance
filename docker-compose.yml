@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  fake-lambda:
+    image: node:14-alpine
+    ports:
+      - "9191:8080"
+    volumes:
+      - "./lambda-shim/index.mjs:/var/task/index.mjs"
+      - "./package:/var/task/package:ro"
+    command: "node /var/task/index.mjs"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
+  local-lambda:
+    image: public.ecr.aws/lambda/nodejs:14-x86_64
+    ports:
+      - "9090:8080"
+    environment:
+      - AWS_XRAY_CONTEXT_MISSING=IGNORE_ERROR
+      - AWS_ACCESS_KEY_ID=DUMMY
+      - AWS_SECRET_ACCESS_KEY=DUMMY
+      - AWS_SESSION_TOKEN=DUMMY
+    volumes:
+      - "./package:/var/task/package:ro"
+    command: "package/index.handler"
+    deploy:
+      resources:
+        limits:
+          memory: 128M
