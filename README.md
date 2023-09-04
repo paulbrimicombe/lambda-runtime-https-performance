@@ -28,4 +28,4 @@ This project was created to investigate slow HTTPS requests for lambda cold-star
 
 There is a clear difference between the performance of the vanilla NodeJS runtime and the AWS Lambda runtimes. The Lambda runtimes are consistently much slower, with the NodeJS 18 Lambda runtime being particularly slow.
 
-[Runtime performance graph](./lambda-slow-https-runtimes.png)!
+![Runtime performance graph](./lambda-slow-https-runtimes.png)
