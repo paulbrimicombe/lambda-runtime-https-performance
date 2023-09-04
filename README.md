@@ -23,3 +23,9 @@ This project was created to investigate slow HTTPS requests for lambda cold-star
 
 1. Edit the [`docker-compose`](./docker-compose.yml) file to set the required NodeJS version and memory restrictions for both docker containers
 1. Run the test script using `node ./test.mjs > results.txt`. This restarts the docker contains and runs the lambda function code in each container 100 times, outputting the invocation times to standard out
+
+## Results
+
+There is a clear difference between the performance of the vanilla NodeJS runtime and the AWS Lambda runtimes. The Lambda runtimes are consistently much slower, with the NodeJS 18 Lambda runtime being particularly slow.
+
+[Runtime performance graph](./lambda-slow-https-runtimes.png)!
